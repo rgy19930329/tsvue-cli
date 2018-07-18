@@ -18,7 +18,8 @@ const chalk = require('chalk')
 const logSymbols = require('log-symbols')
 
 program.usage('<project-name>')
-  .option('-r, --repository [repository]', 'assign to repository', 'rgy19930329/kylinjs-template')
+  // .option('-r, --repository [repository]', 'assign to repository', 'rgy19930329/kylinjs-template')
+  .option('-r, --repository [repository]', 'assign to repository', 'wuguofang/vue-typescript')
   .parse(process.argv);
 
 let projectName = program.args[0];
