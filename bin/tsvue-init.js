@@ -101,8 +101,8 @@ function go() {
     return generator(context.metadata, context.target, path.parse(context.target).dir);
   }).then((res) => {
     // 成功用绿色显示，给出积极的反馈
-    console.log(logSymbols.success, chalk.green('创建成功:)'))
-    console.log(chalk.green(`cd ${projectName}\nnpm install\nnpm run dev`))
+    console.log(logSymbols.success, chalk.green('项目创建成功 ^_^'))
+    console.log(chalk.green(`cd ${projectName}\nnpm install`))
   }).catch(err => {
     // 失败了用红色，增强提示
     console.error(logSymbols.error, chalk.red(`创建失败：${error.message}`))

@@ -1,6 +1,6 @@
 const download = require('download-git-repo')
 const ora = require('ora')
-const url = 'huomarvin/react-koa2-ssr';
+const url = 'rgy19930329/kylinjs-template';
 const spinner = new ora({
   text: `正在下载项目模板，源地址：https://github.com/${url}`,
 });
