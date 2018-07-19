@@ -59,7 +59,58 @@ if (list.length) {  // 如果当前目录不为空
   next = Promise.resolve(projectName)
 }
 
-next && go()
+const config = require('../package.json')
+const latestVersion = require('latest-version')
+const versionCompare = require('../lib/versionCompare')
+const Ora = require('ora')
+const exec = require('child_process').exec
+
+const spinner = new Ora({
+  text: 'Checking cli version'
+});
+
+const spinner2 = new Ora({
+  text: 'Updating cli version'
+});
+
+spinner.start()
+
+console.log('\ncli current version: ' + config.version)
+
+latestVersion('tsvue-cli').then(version => {
+  console.log('\ncli latest version: ' + version)
+  // 
+  spinner.frames = ['-', '+', '-']
+  spinner.color = 'yellow'
+  spinner.text = 'Checked cli version done'
+  spinner.succeed()
+  // 比较当前版本与最新版本
+  var ret = versionCompare(config.version, version)
+  if(ret === -1) { // 当前版本比最新版本小，则更新
+    spinner2.start()
+    exec('npm install tsvue-cli -g', (err, stdout, stderr) => {
+      if(err) {
+        console.log('tsvue-cli install fail!')
+        spinner2.fail()
+      } else {
+        console.log(stdout)
+        //
+        spinner2.frames = ['-', '+', '-']
+        spinner2.color = 'yellow'
+        spinner2.text = 'Updated cli version done'
+        spinner2.succeed()
+        //
+        next && go()
+      }
+    })
+  }else{
+    next && go()
+  }
+}).catch(err => {
+  console.error('error: ' + err)
+})
+
+// next && go()
 
 function go() {
   next.then(projectRoot => {

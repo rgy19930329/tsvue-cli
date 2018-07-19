@@ -1,6 +1,5 @@
 const inquirer = require('inquirer')
 
-
 inquirer.prompt([{
   name: 'projectName',
   message: '项目的名称',
