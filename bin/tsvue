@@ -39,7 +39,7 @@ latestVersion('tsvue-cli').then(version => {
         //
         spinner2.frames = ['-', '+', '-']
         spinner2.color = 'yellow'
-        spinner2.text = 'Checked cli version done'
+        spinner2.text = 'Updated cli version done'
         spinner2.succeed()
         //
         program.version(config.version, '-v, --version')
