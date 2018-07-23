@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const path = require('path')
 const fs = require('fs')
+const os = require('os')
 const download = require('../lib/download')
 const generator = require('../lib/generator')
 
@@ -125,6 +126,7 @@ function go() {
       }
     })
   }).then(context => {
+    var hostname = os.hostname()
     return inquirer.prompt([
       {
         name: 'projectName',
@@ -138,6 +140,10 @@ function go() {
         name: 'projectDescription',
         message: '项目的简介',
         default: `A project named ${context.name}`
+      }, {
+        name: 'author',
+        message: '项目的作者',
+        default: hostname || ''
       }
     ]).then(answers => {
       return {
